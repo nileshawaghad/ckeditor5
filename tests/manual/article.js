@@ -16,6 +16,7 @@ ClassicEditor
 			'heading',
 			'|',
 			'bold',
+			'bolsdfasd',
 			'italic',
 			'link',
 			'bulletedList',
