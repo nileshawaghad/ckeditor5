@@ -7,7 +7,7 @@
 import ClassicEditorBase from "@ckeditor/ckeditor5-editor-classic/src/classiceditor";
 
 import Essentials from "@ckeditor/ckeditor5-essentials/src/essentials";
-import UploadAdapter from "@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter";
+
 import Autoformat from "@ckeditor/ckeditor5-autoformat/src/autoformat";
 import Bold from "@ckeditor/ckeditor5-basic-styles/src/bold";
 import Italic from "@ckeditor/ckeditor5-basic-styles/src/italic";
@@ -16,6 +16,7 @@ import CKFinder from "@ckeditor/ckeditor5-ckfinder/src/ckfinder";
 import EasyImage from "@ckeditor/ckeditor5-easy-image/src/easyimage";
 import Heading from "@ckeditor/ckeditor5-heading/src/heading";
 import Image from "@ckeditor/ckeditor5-image/src/image";
+import ImageInsert from "@ckeditor/ckeditor5-image/src/image";
 import ImageCaption from "@ckeditor/ckeditor5-image/src/imagecaption";
 import ImageStyle from "@ckeditor/ckeditor5-image/src/imagestyle";
 import ImageToolbar from "@ckeditor/ckeditor5-image/src/imagetoolbar";
@@ -30,12 +31,14 @@ import Table from "@ckeditor/ckeditor5-table/src/table";
 import TableToolbar from "@ckeditor/ckeditor5-table/src/tabletoolbar";
 import TextTransformation from "@ckeditor/ckeditor5-typing/src/texttransformation";
 import MathType from "@wiris/mathtype-ckeditor5";
+import SimpleUploadAdapter from "@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter";
+
 export default class ClassicEditor extends ClassicEditorBase {}
 
 // Plugins to include in the build.
 ClassicEditor.builtinPlugins = [
 	Essentials,
-	UploadAdapter,
+
 	Autoformat,
 	Bold,
 	Italic,
@@ -44,6 +47,7 @@ ClassicEditor.builtinPlugins = [
 	EasyImage,
 	Heading,
 	Image,
+	ImageInsert,
 	ImageCaption,
 	ImageStyle,
 	ImageToolbar,
@@ -57,6 +61,7 @@ ClassicEditor.builtinPlugins = [
 	Table,
 	TableToolbar,
 	MathType,
+	SimpleUploadAdapter,
 	TextTransformation,
 ];
 
@@ -84,6 +89,28 @@ ClassicEditor.defaultConfig = {
 			"mathType",
 		],
 	},
+	simpleUpload: {
+		// The URL that the images are uploaded to.
+		uploadUrl: "http://localhost:4000/author/upload",
+		withCredentials: false,
+
+		// Headers sent along with the XMLHttpRequest to the upload server.
+		headers: {
+			"X-CSRF-TOKEN": "CSRF-Token",
+			Authorization:
+				"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZjVkOWExZGM1NmNhODI4YzRhMDk4ZGUiLCJpYXQiOjE2MDA3MDI1ODB9.RYe0Ru3Bu-mrDAcfZgZ67ISc0UUSJLQSoKSwZ0SEvXs",
+		},
+		// Enable the XMLHttpRequest.withCredentials property.
+	},
+
+	// ckfinder: {
+	// 	// Upload the images to the server using the CKFinder QuickUpload command.
+	// 	uploadUrl: "http://localhost:4000/author/upload",
+
+	// 	options: {
+	// 		resourceType: "Images",
+	// 	},
+	// },
 	image: {
 		toolbar: [
 			"imageStyle:full",
